@@ -149,6 +149,7 @@ public class ExtendedFieldDecorator implements FieldDecorator {
         } catch (Exception e) {
             throw new RuntimeException("Error creating UIObject!", e);
         }
+        uiObject.setRootExtendedElement(new ExtendedWebElement(proxy, field.getName(), getLocatorBy(locator)));
         uiObject.setName(field.getName());
         uiObject.setRootElement(proxy);
         uiObject.setRootBy(getLocatorBy(locator));

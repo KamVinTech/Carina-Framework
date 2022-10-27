@@ -23,6 +23,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.foundation.webdriver.locator.ExtendedElementLocator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -83,6 +85,12 @@ public class AbstractUIObjectListHandler<T extends AbstractUIObject> implements 
                                     + e.getMessage(),
                             e);
                 }
+                ExtendedElementLocator extendedElementLocator = (ExtendedElementLocator) locator;
+                ExtendedWebElement extendedWebElement = new ExtendedWebElement(locatorBy,String.format("%s - %d", name, index++),
+                        webDriver,  extendedElementLocator.getSearchContext());
+                extendedWebElement.setElement(element);
+
+                uiObject.setRootExtendedElement(extendedWebElement);
                 uiObject.setName(String.format("%s - %d", name, index++));
                 uiObject.setRootElement(element);
                 uiObject.setRootBy(locatorBy);
